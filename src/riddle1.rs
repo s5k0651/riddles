@@ -4,7 +4,7 @@
 use std::io;
 use std::str::FromStr;
 
-fn read<T: FromStr>(t: &mut T) {
+pub fn read<T: FromStr>(t: &mut T) {
     let mut buf = String::new();
     if let Ok(_) = io::stdin().read_line(&mut buf) {
         if let Ok(val) = buf.trim().trim_end().parse::<T>() {
@@ -15,10 +15,10 @@ fn read<T: FromStr>(t: &mut T) {
 
 // According to the riddle... 1/2 =? 60% ==> 1 =? 120%
 // so let modifier be 1.2 ~ 120%
-// Otherwise simple solution can be done using floor or ceil method (rounding).
+// Otherwise simple solution can be done using ceil method (rounding).
 
-fn func1(numerator: u8, denominator: u8, n:u8 ) -> u8 {
-    let res = 1.2 * (numerator as f32/denominator as f32) * n as f32;
+fn func1(numerator: u8, denominator: u8, n: u8) -> u8 {
+    let res = 1.2 * (numerator as f32 / denominator as f32) * n as f32;
     println!("Answer is: {}", res as u8);
     res as u8
 }
@@ -33,17 +33,17 @@ fn func3(fraction: String, n: String) -> u8 {
     let mut data: Vec<usize> = vec![];
     for part in fraction.split('/') {
         data.push(part.parse().unwrap());
-      }
+    }
     data.push(n.parse().unwrap());
     if data.len() != 3 {
         panic!(" Expected a string like (eg. 1/3)");
-      }
-    let res = 1.2 * (data[0] as f32/data[1] as f32) * data[2] as f32;
+    }
+    let res = 1.2 * (data[0] as f32 / data[1] as f32) * data[2] as f32;
     println!("Answer is: {}", res as u8);
     res as u8
-  }
+}
 
-fn input_type1(mut numerator: u8, mut denominator: u8, mut n:u8) {
+fn input_type1(mut numerator: u8, mut denominator: u8, mut n: u8) {
     println!("Enter the Numerator ");
     read(&mut numerator);
     println!("Enter the Denominator ");
@@ -55,7 +55,7 @@ fn input_type1(mut numerator: u8, mut denominator: u8, mut n:u8) {
     func1(numerator, denominator, n);
 }
 
-fn input_type2(mut dec_val: f32, mut n:f32) {
+fn input_type2(mut dec_val: f32, mut n: f32) {
     println!("Enter in Decimal form: ");
     read(&mut dec_val);
     println!("Enter the Number");
@@ -73,7 +73,7 @@ fn input_type3(mut fraction: String, mut n: String) {
     func3(fraction, n);
 }
 
-pub fn solve_riddle_1(){
+pub fn solve_riddle_1() {
     println!("-----------------------------------------------------------");
     println!("---| Riddle: If 1/2 of 5 is 3, then what is 1/3 of 10? |---");
     println!("-----------------------------------------------------------");
@@ -99,7 +99,7 @@ pub fn solve_riddle_1(){
         1 => input_type1(numerator, denominator, n),
         2 => input_type2(dec_val, n1),
         3 => input_type3(fraction, n2),
-        _ => println!("No Types Found")
+        _ => println!("No Types Found"),
     }
 }
 
